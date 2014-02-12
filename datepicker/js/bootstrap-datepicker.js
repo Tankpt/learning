@@ -329,6 +329,55 @@
 				this.viewMode = Math.max(this.minViewMode, Math.min(2, this.viewMode + dir));
 			}
 			this.picker.find('>div').hide().filter('.datepicker-'+DPGlobal.modes[this.viewMode].clsName).show();
+		},
+
+		//add by tankpt------------------------------------------------------------
+		filterDate: function(timeArray){
+
+			var arrayCompare = new Array(13);
+		    for(var i=0;i<13;i++){
+		        arrayCompare[i]=new Array();
+		    }
+		    //声明timeTmp（日期的格式转换）,utcTmp（时间转换为utc格式）,len每个保存时间的长度
+		    var timeTmp,utcTmp,len;
+		    //预处理将数据时间,将时间进行归档处理
+		   for(var i=0;i<timeArray.length;i++){
+		        timeTmp = timeArray[i].split("-");
+		        utcTmp = new Date(Number(timeTmp[0]),Number(timeTmp[1]-1),Number(timeTmp[2]),0,0,0,0);
+		        len = arrayCompare[Number(timeTmp[1])].length;
+		        arrayCompare[Number(timeTmp[1])][len]=utcTmp.valueOf();
+		    }
+		    //二分查找的函数
+		    function erfen( month,datetime){
+		        var low=0,
+		            high=arrayCompare[month].length-1,
+		            mid;
+		        while(low<=high){
+		            mid=Math.floor((low+high)/2);
+		            if(datetime > arrayCompare[month][mid]){
+		                low=mid+1;
+		            }
+		            else if(datetime < arrayCompare[month][mid]){
+		                high=mid-1;
+		            }
+		            else return 1;// 找到了匹配的时间
+		        }
+		        return 0;//找不到匹配的时间
+		    }
+		    var nowTemp = new Date();
+		    var nowYear = nowTemp.getFullYear(),
+		        nowMonth = nowTemp.getMonth()+1,
+		        nowDay = nowTemp.getDate();
+		    this.onRender =function(date){
+		    	if(date.valueOf() < nowTemp){//判断日期是否大于当前日期
+		           return "disabled";
+		        }
+		        else{
+		            if(erfen(nowMonth,date.valueOf())==1)
+		                return "disabled busy";
+		            return "free";
+		        }
+		    }
 		}
 	};
 	

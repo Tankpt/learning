@@ -11,6 +11,7 @@ datepicker（[demo地址](https://github.com/Tankpt/learning/tree/master/datepic
 自己利用网上已有的一个代码进行了稍微的修改，用的是的[Stefan Petre](http://www.eyecon.ro/bootstrap-datepicker)。大致的功能就是可以在日历中将一些制定的日期给剔除掉,第一次看别人的完整的代码，第一次修改，第一次用这个格式来写文本==也是第一次上出这么个小东西,各种第一次~
 
 **主要做的修改**
+
 1.对css进行了一点添加，主要是占有的一个class：busy和一个空余的class：free<br>
 2.在js中添加了一个filterDate（）的方法，来实现对日期的筛选
 

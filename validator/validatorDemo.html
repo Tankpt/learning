@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>测试验证</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link rel="stylesheet" href="/bandlive/css/bootstrap.min.css" media="screen">
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="/bandlive/js/bootstrap.min.js"></script>
+	<script src="validatorPt.js"></script>
+</head>
+<body>
+	<div class="form-horizontal" style="margin-top: 70px;">
+		<div class="control-group"><!--1-->
+	    	<label class="control-label">巡演名称</label>
+	   		<div class="controls">
+	      		<input type="text" placeholder="张三北京巡演活动" id="text1">
+		    </div>
+	    </div>
+	    <div class="control-group"><!--3-->
+	    	<label class="control-label">演出时长</label>
+	   		<div class="controls">
+				<input type="text" placeholder="3" >小时
+		    </div>
+	    </div>
+	    <div class="control-group"><!--4-->
+	    	<label class="control-label">收入分成</label>
+	   		<div class="controls">
+	      		<input type="text" placeholder="3/7">分成
+		    </div>
+	    </div>	    
+	    <div class="control-group"><!--5-->
+	    	<label class="control-label">线下票价</label>
+	   		<div class="controls">
+	      		<input type="text" placeholder="100">元
+		    </div>
+	    </div>
+	    <div class="control-group"><!--5-->
+	    	<label class="control-label">线上票价</label>
+	   		<div class="controls">
+	      		<input type="text" placeholder="90">元
+		    </div>
+	    </div>
+	    <div class="control-group"><!--5-->
+	    	<label class="control-label">票种数量</label>
+	   		<div class="controls">
+	      		<input type="text" placeholder="100">张
+		    </div>
+	    </div>
+	    <div class="control-group"><!--6-->
+	    	<label class="control-label">演出方食宿</label>
+	   		<div class="controls">
+				<label class="radio inline">
+					<input type="radio" name="optionsRadios1" value="mPay" checked>
+					主办方
+				</label>
+				<label class="radio inline">
+					<input type="radio" name="optionsRadios1" value="hPay">
+					音乐人自付
+				</label>
+		    </div>
+	    </div>
+	    <div class="control-group"><!--7-->
+	    	<label class="control-label">乐队周边销售</label>
+	   		<div class="controls">
+	      		<label class="radio inline">
+					<input type="radio" name="optionsRadios2" value="sellYes" checked>
+					是
+				</label>
+				<label class="radio inline">
+					<input type="radio" name="optionsRadios2" value="sellNo">
+					否
+				</label>
+		    </div>
+	    </div>
+	    <div class="control-group"><!--8-->
+	    	<label class="control-label">其他要求</label>
+	   		<div class="controls">
+	      		<textarea rows="3"></textarea>
+		    </div>
+	    </div>
+	    <div class="control-group"><!--9-->
+	    	<label class="control-label">违约责任</label>
+	   		<div class="controls">
+	      		<a href="">点击查看详细</a>
+		    </div>
+	    </div>
+	</div>
+	<span id="clickMe" class="btn">点击</span>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#clickMe').on('click',function(){
+			console.log(FormValidator("email" , $('#text1').val()));
+		});
+	});
+</script>
+</html>

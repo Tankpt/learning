@@ -4,10 +4,11 @@
 	<title>测试验证</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-	<link rel="stylesheet" href="bootstrap.min.css" media="screen">
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
 	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/thumbnail.js"></script>
 	<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 </head>
 <body>
@@ -29,13 +30,14 @@
 	<div class="container">
 		<div class="row-fluid">
 	    	<div class="span6" id="videoShow">
+	    		
 	    	</div>
 	    	<div class="span6" id="videoPic"></div>
 	    </div>
 	</div>
 </body>
 <script type="text/javascript">	
-	var youkuPicreg = /^http:\/\/player\.youku\.com\/player\.php\/sid\/+([\w]+)+\/v.swf$/;
+	
 	var insertPlace = document.getElementById('videoShow');
 	var insertPic = document.getElementById('videoPic');
 	$(document).ready(function(){
@@ -43,98 +45,16 @@
 			var urlGet = document.getElementById("urlInput").value;
 			insertPlace.innerHTML=urlGet;
 			var urlSrc = insertPlace.firstElementChild.src;
-			var videoId= urlSrc.match(youkuPicreg)[1];
-			var jsonUrl = "http://v.youku.com/player/getPlayList/VideoIDS/"+videoId+"/version/5/source/out";
-			/*----------------------错误的用法，不能跨域访问---------------error
-			$.ajax({
-				type: 'GET', 
-				url: youkuUrl2,
-				dataType : "json",
-				error:function(){
-					console.log("出现错误");
-				},
-				success:function(datas){
-					console.log(datas);
-				},
-			});*/
-
-			/*------------------Jsonp..当服务端提供了jsonp服务
-			<script type="text/javascript">
-
-				function myCallback(data){
-					console.log(data);
-				}
-			<\/script>
-			<script src=" http://www.geonames.org/postalCodeLookupJSON?postalcode=10504&country=US&callback=myCallback">
-			<\/script>*/
-
-
-			/*---------------jQuery +jsonp
-			$.ajax({
-				type: 'GET',
-				url: 'http://www.geonames.org/postalCodeLookupJSON?postalcode=10504&country=US&callback=myCallback',
-				dataType:'jsonp',
-				jsonp: "false",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
-             	jsonpCallback:" myCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
-             	success:function(data){
-             		console.log(data);
-             	}
-			});*/
-
-
-			/*----------------getJSON方法来实现-----------------------------success*/
-			$(function(){
-				    $.getJSON("http://query.yahooapis.com/v1/public/yql", {
-				    q: "select * from json where url=\""+jsonUrl+"\"",
-				    format: "json"
-				}, function(data) {
-				    //console.log(data.query.results.json.data.logo);
-				    var picShow = document.getElementById('videoPic');
-				    if(picShow.firstElementChild){
-				    	picShow.firstElementChild.src = data.query.results.json.data.logo;
-				    }else{
-				    	var imgNode = document.createElement('img');
-				    	imgNode.src = data.query.results.json.data.logo;
-				    	insertPic.appendChild(imgNode);
-				    }
-				});
-			});
-
-
-			/*-----------------jquery ajax +YQL 代理------------------------success  返回的是json数据
-			$.ajax({
-				type: 'GET', 
-				url: "http://query.yahooapis.com/v1/public/yql",
-				data:{
-					 q: "select * from json where url=\"http://v.youku.com/player/getPlayList/VideoIDS/XNjY2MTQ1OTky/timezone/+08/version/5/source/out\"",
-				    format: "json"
-				},
-				dataType : "json",
-				error:function(){
-					console.log("出现错误");
-				},
-				success:function(data){
-					console.log(data.query.results.json.data.logo);
-				},
-			});*/
-
-
-			/*-------------jquery ajax YQL 代理-----------------------------返回jsonp  未测试
-			$.ajax({
-				type: 'GET', 
-				url: "http://query.yahooapis.com/v1/public/yql",
-				data:{
-					 q: "select * from json where url=\"http://v.youku.com/player/getPlayList/VideoIDS/XNjY2MTQ1OTky/timezone/+08/version/5/source/out\"",
-				    format: "json"
-				},
-				dataType : "jsonp",
-				error:function(){
-					console.log("出现错误");
-				},
-				success:function(datas){
-					console.log(datas.query.results.json.data.logo);
-				},
-			});*/
+			var thumbnailsUrl = videoThumbnail(urlSrc);
+			var picShow = document.getElementById('videoPic');
+		    if(picShow.firstElementChild){
+		    	picShow.firstElementChild.src = thumbnailsUrl;
+		    }else{
+		    	var imgNode = document.createElement('img');
+		    	imgNode.src = thumbnailsUrl;
+		    	insertPic.appendChild(imgNode);
+		    }
+			
 		});
 	});
 </script>

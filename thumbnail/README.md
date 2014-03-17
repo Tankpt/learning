@@ -10,5 +10,8 @@
 ----------
 
  在demo中我是输入的是在优酷视频下面分享的地方，嵌入的html代码的那段来进行实现的，其他的应该也是同理的。展示demo的左下角是原视频，不出意外应该都是有广告的，右边是通过这个截取的缩略图
+----2014/3/18版本
+将功能做成了一个函数一样的放在js中的thumbnail.js
 
+需要使用的时候调用函数videoThumbnail（）,里面输入的是优酷视频的地址，不是网址，是类似下面这个http://player.youku.com/player.php/sid/XNjc1Njk4ODg4/v.swf的格式，因为在正则表达上，我做的是输入一个优酷视频下方分享中的<embed src="http://player.youku.com/player.php/sid/XNjc1Njk4ODg4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>最后在页面上显示视频以及他的相应的缩略图
 

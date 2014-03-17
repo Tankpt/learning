@@ -14,5 +14,6 @@
 将功能做成了一个函数一样的放在js中的thumbnail.js
 
 需要使用的时候调用函数videoThumbnail（）,里面输入的是优酷视频的地址，不是网址，是类似下面这个的格式，
-`http://player.youku.com/player.php/sid/XNjc1Njk4ODg4/v.swf`因为在正则表达上，我做的是输入一个优酷视频下方分享中的
-`<embed src="http://player.youku.com/player.php/sid/XNjc1Njk4ODg4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>`最后在页面上显示视频以及他的相应的缩略图
+`http://player.youku.com/player.php/sid/XNjc1Njk4ODg4/v.swf`<br>因为在正则表达上，我做的是输入一个优酷视频下方分享中的链接最后在页面上显示视频以及他的相应的缩略图<br>
+
+    <embed src="http://player.youku.com/player.php/sid/XNjc1Njk4ODg4/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>

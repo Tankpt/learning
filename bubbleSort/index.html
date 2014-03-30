@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Function Example 1</title>
+</head>
+<body>
+    <p id="test"></p>
+
+    <canvas id="drawing" width="400" height="400">
+    </canvas>
+</body>
+<script type="text/javascript">
+        
+        var aSortlist = new Array();
+        var oOperateList = new Array();
+        var nLength = 100;
+        for(var i=0;i<nLength;i++){
+        	aSortlist[i] = Math.floor(Math.random()*100+1);
+        }
+    
+        //html canves
+        var oDrawing = document.getElementById("drawing");
+
+        if(oDrawing.getContext){
+            
+            console.log("support the canves");
+
+            var oContext = oDrawing.getContext("2d");
+            oContext.translate(0,400);
+            
+            var len = aSortlist.length;
+            for(var i=0 ; i<len ; i++){
+                fUpdatetoCanvas(i,aSortlist[i],oContext);
+            }
+
+            //进行排序~~
+            for(var i=0 ; i<len-1 ;i++){
+                var tmp ;
+                for(var j = 0;j<len-1-i;j++){
+                    if(aSortlist[j]>aSortlist[j+1]){
+                        tmp =aSortlist[j];
+                        aSortlist[j]=aSortlist[j+1];
+                        aSortlist[j+1]= tmp;
+                       var oOperate =new Object();
+                       oOperate.x1 = j ;
+                       oOperate.x2 = j+1;
+                       oOperate.y1 = aSortlist[j];
+                       oOperate.y2 = aSortlist[j+1];
+                       oOperateList.push(oOperate);
+                    }
+                }
+            }
+
+            //重现整个排序的过程
+            var fOperatorSort = window.setInterval(function(){
+                if(oOperateList.length>0){
+                    tmpOperate = oOperateList.shift();
+                    fUpdatetoCanvas(tmpOperate.x1,tmpOperate.y1,oContext);
+                    fUpdatetoCanvas(tmpOperate.x2,tmpOperate.y2,oContext);
+                }else{
+                    window.clearInterval(fOperatorSort);
+                }
+            },2);
+        }
+        else{
+            console.log("fail support the canves");
+        }
+        /*function: fAddtocanvas(aSortlist_show)*/
+        function fUpdatetoCanvas(index,num,oContextupdate){
+            var nX = index*3 ,
+                nY = -num*3 ;
+            oContextupdate.beginPath();
+            oContextupdate.clearRect(nX-1,0,2,-300);
+            oContextupdate.moveTo(nX,0);
+            oContextupdate.lineTo(nX,nY);
+            oContextupdate.stroke();
+        }
+    </script>
+</html>

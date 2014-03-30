@@ -1,9 +1,9 @@
 bubbleSort
 ========
 		
-		之前一次在网上看到一个论坛发起的一个活动，30行的js能做什么，其中一个就是实现了一个排序的
-		可视化，一直想自己也试试看，然后尝试做了一下，自己差不多用了60+吧，差距还是很大的，anyway，我
-		也才刚入门，以后继续努力
+之前一次在网上看到一个论坛发起的一个活动，30行的js能做什么，其中一个就是实现了一个排序的
+可视化，一直想自己也试试看，然后尝试做了一下，自己差不多用了60+吧，差距还是很大的，anyway，我
+也才刚入门，以后继续努力,演示地址点击[demo]
 
 bubbleSort
 ------
@@ -20,3 +20,5 @@ bubbleSort
                 window.clearInterval(fOperatorSort);
             }
         },2);
+
+[demo]: http://tankpt.github.io/learning/bubbleSort/

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>codeTest</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .code{
+            background:url(code_bg.jpg);
+            font-family:Arial;
+            font-style:italic;
+            color:blue;
+            font-size:30px;
+            border:0;
+            padding:2px 3px;
+            letter-spacing:3px;
+            font-weight:bolder;            
+            float:left;           
+            cursor:pointer;
+            width:150px;
+            height:60px;
+            line-height:60px;
+            text-align:center;
+            vertical-align:middle;
+        }
+        a{
+            text-decoration:none;
+            font-size:12px;
+            color:#288bc4;
+        }
+        a:hover{
+            text-decoration:underline;
+        }
+    </style>
+    <script type="text/javascript">
+ 
+        function validateCode()
+        {
+            var inputCode = document.getElementById("inputCode").value;
+            if (inputCode.length <= 0)
+            {
+                alert("input!");
+            }
+            else if (inputCode.toUpperCase() != code.toUpperCase())
+            {
+                alert("erro!");
+                createCode();
+            }
+            else
+            {
+                alert("righ!");
+            }       
+        }   
+     </script>
+    <script src="code.js"></script>
+</head>
+<body onload="load()">
+    <div id="checkCode">      
+    </div>
+    <br>
+    <button type="button" id="reload" >again</button>
+    <p>
+        The origin codeNumber is 
+        <span id="outputId"></span>
+    </p>
+</body>
+ <script type="text/javascript">
+    function refersh(){
+        var output = document.getElementById("outputId");
+        output.innerHTML = code.getCode();
+    }
+    function load(){
+        code.createCode(6,'checkCode');
+        refersh();
+    }
+
+    var body = document.getElementsByTagName("body");
+    var again = document.getElementById("reload");
+    again.addEventListener("click",load,false);
+
+ </script>
+</html>

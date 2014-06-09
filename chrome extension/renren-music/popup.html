@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Backbone.js • TodoMVC</title>
+    <style>
+       .audioUrl{
+            display: none;
+        }
+        #audioLists{
+            width: 320px;
+        }
+        .audioItem :after{
+            clear: both;
+        }
+        .audioName,.audioTry,.audioDownload{
+            display: inline-block;
+        }
+        .audioName{
+            float: left;
+        }
+        .audioTry{
+            margin-left: 100px;
+            margin-right: -50px;
+        }
+        .audioDownload{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<script type="text/template" id="item-template">
+    <div class="audioItem">
+        <div class="audioName">
+            <span><%= title %></span>
+            <input type="text" value="<%= url %>" class="audioUrl">
+        </div>
+        <div class="audioTry">
+            <button type="button" class="tryPlay">点击试听</button>
+        </div>
+        <div class="audioDownload">
+            <a href="<%= url %>" download="extension">点击下载</a>
+        </div>
+    </div>
+</script>
+<script src="jquery-2.1.1.min.js"></script>
+<script src="underscore-min.js"></script>
+<script src="backbone-min.js"></script>
+<div>
+   <button id="mybutton">点击获取音频</button>
+    <audio src="" id="audioPlayer" controls="controls"></audio>
+    <ul id="audioLists">
+
+    </ul>
+</div>
+</body>
+<script src="popup.js"></script>
+</html>

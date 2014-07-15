@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>brower</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<style type="text/css">
+	body{
+		margin: 0;
+	}
+	button{
+		width: 50px;
+		height: 50px;
+	}
+</style>
+</head>
+<body>
+	<div id="m-bd">
+		<p>初始meta信息:device-width user-scalable=no</p>
+		<button id="getInfo">get</button><br/>
+		<p>选择页面的宽度
+			<button id="widthAuto">宽度100%</button>
+			<button id="widthLimit">宽度640px</button>
+		</p>
+		<p>选择页面的meta width
+			<button id="metaWidthDevice">device-width</button>
+			<button id="metaWidthLimit">640px</button>
+		</p>
+		<p>选择页面的meta user-scalable
+			<button id="userYes">yes</button>
+			<button id="userNo">no</button>
+		</p>
+		<h2>屏幕尺寸(设备像素)</h2>
+		<p>基本没多少用处</p>
+		<div>设备的宽度window.screen.width:<span id="devicewidth"></span></div>
+		<div>设备的高度window.screen.height:<span id="deviceheight"></span></div>
+
+		<hr>
+
+		<h2>窗口尺寸(visual viewport)</h2>
+		<p>浏览器窗口的整体大小，包括滚动条。</p>
+		<div>浏览器的宽度window.innerWidth:<span id="browerwidth"></span></div>
+		<div>浏览器的高度window.innerHeight:<span id="browerheight"></span></div>
+
+		<hr>
+
+		<h2>滚动距离</h2>
+		<p>页面滚动的距离</p>
+		<div>浏览器的滚动宽度window.pageXOffset:<span id="scrollX"></span></div>
+		<div>浏览器的滚动高度window.pageYOffset:<span id="scrollY"></span></div>
+
+		<hr>
+
+		<h2>度量viewport(layout viewport)</h2>
+		<p>浏览器窗口的整体大小，不包括滚动条。</p>
+		<div>viewport宽度documentElement.clientWidth:<span id="clientWidth"></span></div>
+		<div>viewport高度documentElement.clientHeight:<span id="clientHeight"></span></div>
+
+		<hr>
+
+		<h2>度量html标签</h2>
+		<div>html的宽度window.pageXOffset:<span id="htmlWidth"></span></div>
+		<div>html的高度window.pageYOffset:<span id="htmlHeight"></span></div>
+
+		<hr>
+
+		<h2>缩放比例</h2>
+		<div>缩放比例scale:<span id="scale"></span></div>
+	</div>
+</body>
+<script type="text/javascript">
+	var _d = document,
+		_deviceWidth = _d.getElementById("devicewidth"),
+		_deviceHeight = _d.getElementById("deviceheight"),
+		_browerWidth = _d.getElementById("browerwidth"),
+		_browerHeight =  _d.getElementById("browerheight"),
+		_scrollX = _d.getElementById("scrollX"),
+		_scrollY = _d.getElementById("scrollY"),
+		_clientWidth = _d.getElementById("clientWidth"),
+		_clientHeight = _d.getElementById("clientHeight"),
+		_htmlWidth = _d.getElementById("htmlWidth"),
+		_htmlHeight = _d.getElementById("htmlHeight"),
+		_scale = _d.getElementById("scale");
+
+	var _getInfo = function(){
+		_deviceWidth.innerHTML = window.screen.width;
+		_deviceHeight.innerHTML = window.screen.height;
+		_browerWidth.innerHTML = window.innerWidth;
+		_browerHeight.innerHTML = window.innerHeight;
+		_scrollX.innerHTML = window.pageXOffset;
+		_scrollY.innerHTML = window.pageYOffset;
+		_clientWidth.innerHTML = _d.documentElement.clientWidth;
+		_clientHeight.innerHTML = _d.documentElement.clientHeight;
+		_htmlWidth.innerHTML = _d.documentElement.offsetWidth;
+		_htmlHeight.innerHTML = _d.documentElement.offsetHeight;
+		_scale.innerHTML = screen.width/window.innerWidth;
+	};
+	
+	_getInfo();
+
+	var _addEvent = function(_node,_event,_itearta){
+		if(_node.addEventListener){
+			_node.addEventListener(_event,_itearta);
+		}else{
+			_node.attachEvent(_event,_itearta);
+		}
+	};
+
+	var 
+		_button = _d.getElementById("getInfo"),
+		_setWidthAuto = _d.getElementById("widthAuto"),
+		_setWidthLimit = _d.getElementById("widthLimit"),
+		_metaWidthDevice = _d.getElementById("metaWidthDevice"),
+		_metaWidthLimit = _d.getElementById("metaWidthLimit"),
+		_userYes = _d.getElementById("userYes"),
+		_userNo = _d.getElementById("userNo");
+
+	
+	_addEvent(_button,"click",_getInfo);
+
+	//set the width
+	_addEvent(_setWidthAuto,"click",function(){
+		_d.getElementById("m-bd").style.width = "100%";
+	});
+	_addEvent(_setWidthLimit,"click",function(){
+		_d.getElementById("m-bd").style.width = "640px";
+	});
+
+	//set the meta width
+	_addEvent(_metaWidthLimit,"click",function(){
+		var _tmp =_d.getElementsByTagName("meta")[1];
+		_tmp["content"] =  _tmp["content"].replace(/device-width/,"640");
+	});
+	_addEvent(_metaWidthDevice,"click",function(){
+		var _tmp =_d.getElementsByTagName("meta")[1];
+		_tmp["content"] =  _tmp["content"].replace(/640/,"device-width");
+	});
+
+	//set the user-scalable
+	_addEvent(_userYes,"click",function(){
+		var _tmp =_d.getElementsByTagName("meta")[1];
+		_tmp["content"] =  _tmp["content"].replace(/no/,"yes");
+	});
+	_addEvent(_userNo,"click",function(){
+		var _tmp =_d.getElementsByTagName("meta")[1];
+		_tmp["content"] =  _tmp["content"].replace(/yes/,"no");
+	});
+</script>
+</html>

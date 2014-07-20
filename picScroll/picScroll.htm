@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>picScroll Test</title>
+<style type="text/css">
+	.u-picScroll{
+		width: 520px;
+		height: 280px;
+		overflow: hidden;
+		position: relative;
+		*zoom:1;
+	}
+	.control{
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		position: absolute;
+		top: 120px;
+		display: none;
+		background-color: #000;
+		opacity: .6;
+		color: #FFF;
+	}
+	.u-picScroll:hover .control{
+		display: block;
+	}
+	.toLeft{
+		left: 10px;
+	}
+	.toRight{
+		right: 10px;
+	}
+	.picList{
+		width: 3640px;
+		position: absolute;
+	}
+	.picItem{
+		width: 520px;
+		height: 280px;
+		float: left;
+		display: block;
+
+	}
+	.picItem .imag{
+		width: 520px;
+		height: 280px;
+	}
+</style>
+</head>
+<body>
+<div id="picScroll" class="u-picScroll">
+	<div class="picList" style="left:-520px;">
+		<div class="picItem">
+			<img src="5.jpg" class="imag j-imag">
+		</div>
+		<div class="picItem">
+			<img src="1.jpg" class="imag j-imag">
+		</div>
+		<div class="picItem">
+			<img src="2.png" class="imag j-imag">
+		</div>
+		<div class="picItem">
+			<img src="3.jpg" class="imag j-imag">
+		</div>
+		<div class="picItem">
+			<img src="4.jpg" class="imag j-imag">
+		</div>
+		<div class="picItem">
+			<img src="5.jpg" class="imag j-imag">
+		</div>
+		<div class="picItem">
+			<img src="1.jpg" class="imag j-imag">
+		</div>
+	</div>
+	<div class="toLeft control">left</div>
+	<div class="toRight control">right</div>
+</div>
+
+</body>
+<script type="text/javascript">
+	var _d = document,
+		_picScroll = _d.getElementById("picScroll"),
+		_picBody = _picScroll.children[0],
+		_toLeft = _picScroll.children[1],
+		_toRight = _picScroll.children[2],
+		_picItems = _picBody.children,
+		PICWIDTH = -520,_settime;
+
+	var addEvent = function(obj,event,iterate){
+		if(obj.attachEvent){
+			obj.addEvent(event,iterate);
+		}else{
+			obj.addEventListener(event,iterate);
+		}
+	}; 
+
+	var animate = function(_obj,attr,action,end){
+		var _tmp,_attr,
+			_step = action.substring(0,action.length-2).valueOf()/10,
+			_type = action.substring(action.length-2),
+			count=1;
+
+		if(!_settime){
+			_settime = setInterval(function(){
+				attr = attr.toString();//question!!!!!!!!!!!!
+				_tmp = _obj[attr];
+				_obj[attr] = Number(_tmp.substring(0,_tmp.length-2))+Number(_step)+_type;
+				if(count++ == 10){
+					clearInterval(_settime);
+					_settime = null;
+					if(end=="left"){
+						_obj[attr] =  5*PICWIDTH+"px";
+					}else if(end =="right"){
+						_obj[attr] =  PICWIDTH+"px";
+					}
+				}
+			},50);
+		}
+	};
+	
+
+	addEvent(_toRight,'click',function(){
+		var _left = _picBody.style.left;
+		if(_left.substring(0,_left.length-2) != PICWIDTH*5){
+			animate(_picBody.style,"left","-520px");
+		}else if(_left.substring(0,_left.length-2) == PICWIDTH*5){
+			animate(_picBody.style,"left","-520px","right");
+			//_picBody.style.left = PICWIDTH+"px";
+		}
+	});
+
+	addEvent(_toLeft,'click',function(){
+		var _left = _picBody.style.left;
+		if(_left.substring(0,_left.length-2) != PICWIDTH){
+			animate(_picBody.style,"left","520px");
+		}else if(_left.substring(0,_left.length-2) == PICWIDTH){
+			animate(_picBody.style,"left","520px","left");
+			//_picBody.style.left = 5*PICWIDTH+"px";
+		}
+	});
+</script>
+</html>

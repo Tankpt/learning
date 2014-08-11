@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+    //      switch(location.hash){
+    //          case '#data':
+    //              alert(111);
+    //              break;
+    //          case '#test':
+    //              callback();
+    //              break;
+    //          default :
+    //                alert("other")
+    //      }
+    //
+    //      function callback(){
+    try {
+        parent.location.hash = 'getdata='+location.hash;
+    } catch (e) {
+        // ie、chrome的安全机制无法修改parent.location.hash，
+        var ifrproxy = document.createElement('iframe');
+        ifrproxy.style.display = 'none';
+        ifrproxy.src = 'http://parent.com:63342/WebStorm/crossMessage/hash/proxy.html#getdata='+location.hash.substring(1);
+        document.body.appendChild(ifrproxy);
+    }
+    //      }
+</script>
+</html>

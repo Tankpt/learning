@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button id="sendMessage">发送消息</button>
+    <input type="text" id="messageTo">
+</body>
+<script>
+
+    var ifr = document.createElement('iframe');
+
+    ifr.style.width = "500px";
+    ifr.style.height= "300px";
+    document.body.appendChild(ifr);
+
+    var _sendButton = document.getElementById("sendMessage"),
+        _infoInput = document.getElementById("messageTo"),
+        state;
+
+    _sendButton.addEventListener('click',function(){
+        var _info = _infoInput.value;
+        ifr.src = 'http://parent.com:63342/WebStorm/crossMessage/name/proxy.html';
+        state = 0;
+    },false);
+
+
+    ifr.onload   = function() {
+
+        if (state === 0) {
+            ifr.contentWindow.name  =_infoInput.value;    // 读取数据
+            ifr.contentWindow.location  = 'http://child.com:3000';
+            state = 1;
+        } else if (state === 1) {
+            ifr.contentWindow.location = "http://parent.com:63342/WebStorm/crossMessage/name/proxy.html";    // 设置的代理文件
+            state = 2;
+        }else{
+            alert(   ifr.contentWindow.name);
+
+        }
+    };
+</script>
+</html>

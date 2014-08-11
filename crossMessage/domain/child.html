@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>child</title>
+</head>
+<body>
+    <h2>helllo</h2>
+    <div id="message">子元素的信息</div>
+    <button id="getMessage">获取iframe中信息</button>
+</body>
+<script>
+
+    document.domain = 'parent.com';
+    document.getElementById("getMessage").addEventListener('click',function(){
+        alert(window.top.document.getElementById("message").innerHTML);
+    },false);
+</script>
+</html>

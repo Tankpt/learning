@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<h2>我是子元素</h2>
+<div class="left">
+    <h4>message from father</h4>
+    <div id="infoList"></div>
+</div>
+</body>
+<script type="text/javascript">
+
+    if(window.name==1){
+        window.name = "meaasge from child ! I get 1";
+    }else{
+        window.name = "meaasge from child ! I get other";
+    }
+</script>
+</html>

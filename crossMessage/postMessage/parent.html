@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h2>I'm father body</h2>
+<div>
+    <h4>message from child</h4>
+    <div id="infoList"></div>
+</div>
+<h4>input message to child</h4>
+<input type="text" id="message">
+<button onclick="sendMessage()">send</button>
+<div style="clear:both"></div>
+<br />
+<br>
+<iframe id="ifb" name="b"  src="http://child.com:3000/" width="500px" height="300px"></iframe>
+</body>
+<script>
+    var _messageList  = document.getElementById("infoList");
+    var sendMessage = function(){
+        var _parent = document.getElementById("ifb");
+        var _target = "http://child.com:3000";
+        var _messageContent= document.getElementById("message").value;
+        _parent.contentWindow.postMessage(_messageContent,_target);
+    };
+
+    window.addEventListener('message',function(e){
+        if(e.origin == "http://child.com:3000"){
+            var _tmp = document.createElement("div");
+            _tmp.textContent = e.data;
+            _messageList.appendChild(_tmp);
+        }
+    },false);
+</script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="sendMessage">发送消息</button>
+<input type="text" id="messageTo">
+</body>
+<script>
+        var _sendButton = document.getElementById("sendMessage"),
+            _infoInput = document.getElementById("messageTo");
+
+        _sendButton.addEventListener('click',function(){
+            var _data = _infoInput.value;
+            location.hash = '';
+            var ifr = document.createElement('iframe');
+            //ifr.style.display = 'none';
+            ifr.src = 'http://child.com:3000/#'+_data;
+            document.body.appendChild(ifr);
+        },false);
+
+</script>
+</html>

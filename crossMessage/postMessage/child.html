@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h2>I'M modal B</h2>
+<div class="left">
+    <h4>message from father</h4>
+    <div id="infoList"></div>
+</div>
+<div class="right">
+    <h4>send message to father</h4>
+    <input type="text" id="message">
+    <button onclick="sendMessage()">send</button>
+</div>
+
+</body>
+<script type="text/javascript">
+    var _messageList  = document.getElementById("infoList");
+    window.addEventListener('message',function(e){
+        if(e.origin == "http://parent.com:63342"){
+            console.log(e.data);
+            var _tmp = document.createElement("div");
+            _tmp.textContent = e.data;
+            _messageList.appendChild(_tmp);
+        }
+    },false);
+
+    var sendMessage =function (){
+        var _parent = window.parent;
+        var _target = "http://parent.com:63342";
+        var _messageContent= document.getElementById("message").value;
+        _parent.postMessage(_messageContent,_target);
+    };
+</script>
+</html>

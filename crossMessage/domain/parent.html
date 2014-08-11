@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2>通过修改domain.name来实现跨域访问</h2>
+    <div id="message">父元素的信息</div>
+    <button id="getIframe">获取iframe中信息</button>
+    <hr>
+</body>
+<script>
+
+    var _button = document.getElementById("getIframe");
+
+    document.domain = 'parent.com';
+    var ifr = document.createElement('iframe');
+    ifr.src = 'http://script.parent.com:63342/WebStorm/crossMessage/domain/child.html';
+    ifr.style.width = "500px";
+    ifr.style.height= "300px";
+    document.body.appendChild(ifr);
+    _button.addEventListener('click',function(){
+        var _doc = ifr.contentDocument || ifr.contentWindow.document;
+
+        alert(_doc.getElementById("message").innerHTML);
+    },false);
+
+</script>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>ppt demo</title>
+
+		<meta name="description" content="a summarize using HTML">
+		<meta name="author" content="tankpt">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<style type="text/css">
+		.f-cb:after,.f-cbli li:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+		.f-cb,.f-cbli li{zoom:1;}
+		.f-fl{float:left;}
+		.f-fr{float:right;}
+
+		/*person css style*/
+		
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>实习个人总结</h2>
+				</section>
+				<section>
+					<h3>个人简介</h3>
+					<ul style="margin-top:100px;">
+						<li>姓名：王天一</li>
+						<li>所在部门：杭研教育部前端组</li>
+					</ul>
+				</section>
+					<section>
+						<h3>实习工作</h3>
+						<div style="margin-top:100px;" class="f-cb">
+							<div class="m-l f-fl">
+								<img src="logo.png">
+							</div>
+							<div class="m-r">
+								<ul >
+									<li>公开课活动的专题制作</li>
+									<li>云课堂和Mooc日常功能需求制作</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<h3>实习生活</h3>
+						<ul style="margin-top:100px;">
+							<li>参与部门各种打球聚餐活动活动</li>
+							<li>课余做一些demo以及技术总结置于<a href="https://github.com/Tankpt" target="_blank">Github</a></li>
+						</ul>
+					</section>
+				<section>
+					<h3>技术＋业务 = 我眼中的前端</h3>
+					<p></p>
+				</section>
+				<section>
+					<h3>总结</h3>
+					<ul style="margin-top:100px;">
+						<li>良好的团队工作氛围</li>
+						<li>个人能力的提升</li>
+					</ul>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+		
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				overview: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>

@@ -30,6 +30,21 @@
 	};
 
 	/*
+	* dispatchEvent
+	*/
+	_v._$dispatchEvent = function(_node,_event){
+		try{
+			if(_node.dispatchEvent){
+				var _eventObj = document.createEvent("event");
+				_eventObj.initEvent(_event,true,true);/*allow Bubble and cancelable*/
+				_node.dispatchEvent(_eventObj);
+			}else if(_node.fireEvent){
+				_node.fireEvent('on'+_event);
+			}
+		}catch(e){}
+	};
+
+	/*
 	*stop the propagation
 	**/
 	_v._$stopPropagation = function(_event){

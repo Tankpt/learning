@@ -6,7 +6,7 @@
 3. hasClass(_node,_className)
 
 
-​##event##
+##event##
 1. addEvent(_node,_event,_iterate)
 2. removeEvent(_node,_event,_iterate)
 3. dispatchEvent(_node,_event)

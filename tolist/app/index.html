@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TodoList</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+<section id="todoapp" ng-controller="todoCtrl">
+    <header id="header">
+        <h1>todos</h1>
+        <input id="new-todo" placeholder="What needs to be done?" autofocus ng-model="todoItem" ng-keydown="addTodo($event)">
+    </header>
+    <section id="main">
+        <input id="toggle-all" type="checkbox" ng-click="toggleAll()">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list">
+            <li ng-repeat="todo in todos">
+                <div class="view">
+                    <input class="toggle" type="checkbox" ng-click="toggleComplete()">
+                    <label class="ng-binding">{{todo.name}}</label>
+                    <button class="destroy"  ng-click="destroyTodo(todo)" ></button>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <footer id="footer"></footer>
+</section>
+
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="js/control.js"></script>
+</body>
+</html>

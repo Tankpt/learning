@@ -9,29 +9,49 @@
     <link rel="stylesheet" href="css/base.css">
 </head>
 <body>
-<section id="todoapp" ng-controller="todoCtrl">
-    <header id="header">
-        <h1>todos</h1>
-        <input id="new-todo" placeholder="What needs to be done?" autofocus ng-model="todoItem" ng-keydown="addTodo($event)">
-    </header>
-    <section id="main">
-        <input id="toggle-all" type="checkbox" ng-click="toggleAll()">
-        <label for="toggle-all">Mark all as complete</label>
-        <ul id="todo-list">
-            <li ng-repeat="todo in todos">
-                <div class="view">
-                    <input class="toggle" type="checkbox" ng-click="toggleComplete()">
-                    <label class="ng-binding">{{todo.name}}</label>
-                    <button class="destroy"  ng-click="destroyTodo(todo)" ></button>
-                </div>
-            </li>
-        </ul>
+<ng-view />
+<script type="text/ng-template" id="todomvc-index.html">
+    <section id="todoapp" ng-controller="todoCtrl">
+        <header id="header">
+            <h1>todos</h1>
+            <input id="new-todo" placeholder="What needs to be done?" autofocus ng-model="todoItem" ng-keydown="addTodo($event)">
+        </header>
+        <section id="main">
+            <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+            <label for="toggle-all">Mark all as complete</label>
+            <ul id="todo-list">
+                <li ng-repeat="todo in todos | filter:statusFilter" ng-class="{'completed': todo.completed}">
+                    <div class="view">
+                        <input class="toggle" type="checkbox" ng-model="todo.completed">
+                        <label class="ng-binding">{{todo.name}}</label>
+                        <button class="destroy"  ng-click="destoryTodo(todo)" ></button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <footer id="footer" ng-show="todos.length" class="">
+            <span id="todo-count">
+                <strong ng-bind="unCompletedCount"></strong>items left
+            </span>
+            <ul id="filters">
+                <li>
+                    <a ng-class="{selected: status == ''} " href="#/">All</a>
+                </li>
+                <li>
+                    <a ng-class="{selected: status == 'active'}" href="#/active">Active</a>
+                </li>
+                <li>
+                    <a ng-class="{selected: status == 'completed'}" href="#/completed" class="selected">Completed</a>
+                </li>
+            </ul>
+            <button id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount" class="ng-binding">Clear completed ({{completedCount}})</button>
+        </footer>
     </section>
-    <footer id="footer"></footer>
-</section>
-
+</script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/storage.js"></script>
   <script src="js/control.js"></script>
 </body>
 </html>

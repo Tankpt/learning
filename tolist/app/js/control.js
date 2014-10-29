@@ -3,38 +3,51 @@
  */
 'use strict';
 
-/* Controllers */
+phonecatApp.controller('todoCtrl', function($scope,$routeParams,$filter,todoStorage) {
 
-var phonecatApp = angular.module('MyApp', []);
+    /*initial*/
+    $scope.toggleAll = false;
 
-phonecatApp.controller('todoCtrl', function($scope) {
-    $scope.todos = [{
-        name:"111" ,
-        complete : 0
-    }];
+    $scope.todos = todoStorage.get();
 
-    $scope.toggleAll = function(){
-        var tmpArray = $scope.todos,
-            i= 0,
-            len=tmpArray.length;
+    var todos = $scope.todos ;
 
-       for(;i<len;i++){
-           tmpArray[i].complete =1;
-       }
+    /* globle watch */
+    $scope.$watch('todos', function (newValue, oldValue) {
+        $scope.unCompletedCount = $filter('filter')(todos, { completed: false }).length;
+        $scope.completedCount = todos.length - $scope.unCompletedCount;
+        if (newValue !== oldValue) { // This prevents unneeded calls to the local storage
+            todoStorage.put(todos);
+        }
+    },true);
+
+    $scope.markAll = function(_new){
+        angular.forEach(todos,function(_item,_index){
+            _item.completed = !_new;
+        });
     };
+
+    $scope.$on('$routeChangeSuccess', function () {
+        var status = $scope.status = $routeParams.status || '';
+
+        $scope.statusFilter = (status === 'active') ?
+        { completed: false } : (status === 'completed') ?
+        { completed: true } : null;
+    });
 
     $scope.addTodo = function ($event){
         if($event.keyCode == 13){
-            $scope.todos.push({
+            todos.push({
                 name : $scope.todoItem ,
-                complete : 0
+                completed : false
             });
             $scope.todoItem = "";
         }
     };
 
-    $scope.destroyTodo = function(todo){
-        var tmpArray = $scope.todos,
+    /*atodo item*/
+    $scope.destoryTodo = function(todo){
+        var tmpArray = todos,
             i= 0,
             len=tmpArray.length;
         for(;i<len;i++){
@@ -44,4 +57,12 @@ phonecatApp.controller('todoCtrl', function($scope) {
         }
         tmpArray.splice(i,1);
     };
-});
+
+    /*
+    * clear todos items
+    * */
+    $scope.clearCompletedTodos = function(){
+        $scope.todos = todos =  $filter('filter')(todos, { completed: false });
+    };
+
+ });

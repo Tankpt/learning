@@ -6,10 +6,10 @@ var phonecatApp = angular.module('MyApp', ['ngRoute']).config(function ($routePr
 
     $routeProvider.when('/', {
         controller: 'todoCtrl',
-        templateUrl: 'todomvc-index.html'
+        templateUrl: 'todoTmp'
     }).when('/:status', {
         controller: 'todoCtrl',
-        templateUrl: 'todomvc-index.html'
+        templateUrl: 'todoTmp'
     }).otherwise({
         redirectTo: '/'
     });

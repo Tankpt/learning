@@ -16,7 +16,7 @@ phonecatApp.controller('todoCtrl', function($scope,$routeParams,$filter,todoStor
     $scope.$watch('todos', function (newValue, oldValue) {
         $scope.unCompletedCount = $filter('filter')(todos, { completed: false }).length;
         $scope.completedCount = todos.length - $scope.unCompletedCount;
-        if (newValue !== oldValue) { // This prevents unneeded calls to the local storage
+        if (newValue !== oldValue) {
             todoStorage.put(todos);
         }
     },true);
